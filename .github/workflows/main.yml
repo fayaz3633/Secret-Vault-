@@ -13,20 +13,22 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install System and Python Dependencies
+      - name: Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libffi-dev libssl-dev python3-pip \
           zip unzip openjdk-17-jdk libncurses5 libncursesw5 zlib1g-dev \
           lib32stdc++6 lib32z1
           
-          # یہاں ہم انسٹال بھی کر رہے ہیں اور راستہ بھی ہمیشہ کے لیے سیٹ کر رہے ہیں
+          # سائتھون اور بلڈوزر کو بالکل صحیح طریقے سے انسٹال کرنا
           pip install --upgrade pip
           pip install "cython<3.0" buildozer
-          echo "$HOME/.local/bin" >> $GITHUB_PATH
+          
+          # یہ لائن اسپیلنگ اور پاتھ کے تمام مسائل حل کر دے گی
+          echo "/home/runner/.local/bin" >> $GITHUB_PATH
 
       - name: Build with Buildozer
         run: |
-          # اب یہاں دوبارہ ایکسپورٹ کرنے کی ضرورت نہیں پڑے گی
+          # اینڈرائیڈ کے تمام لائسنس ایک ہی بار میں قبول کرنا
           yes | buildozer android debug
           
