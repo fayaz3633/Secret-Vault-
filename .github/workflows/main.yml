@@ -5,6 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      # یہ وہ لائن ہے جو فائلوں کو "Locate" کروائے گی
       - name: Checkout Code
         uses: actions/checkout@v4
 
@@ -13,22 +14,16 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install Dependencies
+      - name: Install dependencies
         run: |
           sudo apt-get update
-          sudo apt-get install -y build-essential libffi-dev libssl-dev python3-pip \
-          zip unzip openjdk-17-jdk libncurses5 libncursesw5 zlib1g-dev \
-          lib32stdc++6 lib32z1
-          
-          # سائتھون اور بلڈوزر کو بالکل صحیح طریقے سے انسٹال کرنا
+          sudo apt-get install -y build-essential libffi-dev libssl-dev python3-pip
           pip install --upgrade pip
-          pip install "cython<3.0" buildozer
-          
-          # یہ لائن اسپیلنگ اور پاتھ کے تمام مسائل حل کر دے گی
-          echo "/home/runner/.local/bin" >> $GITHUB_PATH
+          pip install "cython<3.0" buildozer 
 
       - name: Build with Buildozer
         run: |
-          # اینڈرائیڈ کے تمام لائسنس ایک ہی بار میں قبول کرنا
-          yes | buildozer android debug
+          export PATH=$PATH:~/.local/bin
+          # ہم یہاں --verbose ڈال رہے ہیں تاکہ ہمیں تفصیل سے پتہ چلے کہ کیا ہو رہا ہے
+          buildozer android debug --verbose
           
