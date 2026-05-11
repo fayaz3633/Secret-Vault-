@@ -4,24 +4,19 @@ package.name = vipvault
 package.domain = org.fayyaz
 source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
-version = 1.0.0
+version = 0.1
 
-# Requirements (صرف پائتھن کی لائبریریاں)
-requirements = python3, kivy, kivymd, cryptography, pyjnius
+# یہاں میں نے SDL2 کی تمام لائبریریاں شامل کر دی ہیں
+requirements = python3, kivy==2.2.1, kivymd==1.1.1, cryptography, pyjnius, sdl2_image, sdl2_ttf, sdl2_mixer, sdl2
 
 orientation = portrait
-osx.python_version = 3
-osx.kivy_version = 1.9.1
 fullscreen = 0
+android.archs = arm64-v8a, armeabi-v7a
+android.allow_backup = True
 
-# Android specific (اینڈرائیڈ کی خاص لائبریریاں یہاں آئیں گی)
-android.permissions = USE_BIOMETRIC, USE_FINGERPRINT, INTERNET
+# Android API Settings
 android.api = 33
 android.minapi = 21
 android.sdk = 33
 android.ndk = 25b
-android.gradle_dependencies = 'androidx.security:security-crypto:1.1.0-alpha06', 'androidx.biometric:biometric:1.1.0'
-
-[buildozer]
-log_level = 2
-warn_on_root = 1
+android.accept_sdk_license = True
