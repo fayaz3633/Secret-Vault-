@@ -6,20 +6,19 @@ source.dir = .
 source.include_exts = py,png,jpg,kv,atlas
 version = 0.1
 
-# تمام ضروری لائبریریز جو آپ کی ایپ کو چاہیے
 requirements = python3,kivy==2.2.1,kivymd==1.1.1,pillow,cryptography,pyjnius
 
 orientation = portrait
 fullscreen = 0
 
-# اینڈرائیڈ کی نئی سیٹنگز (API 33)
+# یہاں سے ہم نے SDK مکمل غائب کر دیا ہے، صرف API رکھا ہے
 android.api = 33
 android.minapi = 21
 android.ndk = 25b
 android.accept_sdk_license = True
 android.archs = arm64-v8a, armeabi-v7a
 
-# فائل مینیجر کے لیے ضروری اجازتیں (Permissions)
+# یہ اجازتیں فائل مینیجر کے لیے ضروری ہیں
 android.permissions = READ_EXTERNAL_STORAGE, WRITE_EXTERNAL_STORAGE, MANAGE_EXTERNAL_STORAGE, CAMERA
 android.manifest.intent_filters = [ {"name": "android.intent.action.VIEW", "categories": ["android.intent.category.DEFAULT"] } ]
 
