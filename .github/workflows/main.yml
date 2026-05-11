@@ -3,7 +3,6 @@ on: [push, pull_request]
 
 jobs:
   build:
-    # یہاں ہم نے ورژن 22.04 کر دیا ہے جو زیادہ سٹیبل ہے
     runs-on: ubuntu-22.04
     steps:
       - name: Checkout Code
@@ -14,7 +13,11 @@ jobs:
         with:
           python-version: '3.10'
 
-      - name: Install basic tools
+      # یہ قدم اینڈرائیڈ کا سارا سسٹم خود سیٹ کر دے گا
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Install Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libffi-dev libssl-dev python3-pip zip unzip openjdk-17-jdk
@@ -24,6 +27,12 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # اب بلڈوزر خود اپنی ضرورت کی چیزیں ڈاؤن لوڈ کر لے گا
+          # اینڈرائیڈ پاتھ کو ایکٹو کرنا تاکہ ریڈ وارننگ ختم ہو جائے
+          export APP_ANDROID_SDK=$ANDROID_HOME
           yes | buildozer android debug --verbose
-          
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: VIP-Vault-APK
+          path: bin/*.apk
