@@ -13,11 +13,7 @@ jobs:
         with:
           python-version: '3.10'
 
-      # یہ قدم اینڈرائیڈ کا سارا سسٹم خود سیٹ کر دے گا
-      - name: Setup Android SDK
-        uses: android-actions/setup-android@v3
-
-      - name: Install Dependencies
+      - name: Install Basic Dependencies
         run: |
           sudo apt-get update
           sudo apt-get install -y build-essential libffi-dev libssl-dev python3-pip zip unzip openjdk-17-jdk
@@ -27,12 +23,5 @@ jobs:
 
       - name: Build with Buildozer
         run: |
-          # اینڈرائیڈ پاتھ کو ایکٹو کرنا تاکہ ریڈ وارننگ ختم ہو جائے
-          export APP_ANDROID_SDK=$ANDROID_HOME
+          # ہم اینڈرائیڈ پاتھ کو بلڈوزر کے ڈیفالٹ پر چھوڑ دیتے ہیں
           yes | buildozer android debug --verbose
-
-      - name: Upload APK
-        uses: actions/upload-artifact@v4
-        with:
-          name: VIP-Vault-APK
-          path: bin/*.apk
