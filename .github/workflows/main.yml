@@ -24,12 +24,12 @@ jobs:
           pip install "cython<3.0" buildozer
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Build with Buildozer
+      - name: Build with Buildozer (Silent Mode)
         run: |
-          # میموری بڑھانے کے لیے تاکہ لارج سائز کا مسئلہ نہ آئے
           export GRADLE_OPTS="-Xmx2048m"
           export APP_ANDROID_SDK=$ANDROID_HOME
-          yes | buildozer android debug --verbose
+          # ہم نے --verbose ہٹا دیا ہے تاکہ Large Size کا ایرر نہ آئے
+          yes | buildozer android debug
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
