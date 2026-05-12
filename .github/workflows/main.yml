@@ -28,7 +28,7 @@ jobs:
         run: |
           export GRADLE_OPTS="-Xmx2048m"
           export APP_ANDROID_SDK=$ANDROID_HOME
-          # ہم نے --verbose ہٹا دیا ہے تاکہ Large Size کا ایرر نہ آئے
+          # ہم نے کمانڈ کو سائلنٹ رکھا ہے تاکہ Large Size کا مسئلہ نہ آئے
           yes | buildozer android debug
 
       - name: Upload APK
