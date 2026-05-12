@@ -21,15 +21,17 @@ jobs:
           libjpeg-dev libfreetype6-dev pkg-config ant
           
           pip install --upgrade pip
+          # یہاں ہم نے Cython کا وہ ورژن رکھا ہے جو ڈیپ سیک نے تجویز کیا
           pip install "cython<3.0" buildozer
           echo "$HOME/.local/bin" >> $GITHUB_PATH
 
-      - name: Build with Buildozer (Silent Mode)
+      - name: Build with Buildozer
         run: |
           export GRADLE_OPTS="-Xmx2048m"
           export APP_ANDROID_SDK=$ANDROID_HOME
-          # ہم نے کمانڈ کو سائلنٹ رکھا ہے تاکہ Large Size کا مسئلہ نہ آئے
+          # ہم نے یہاں خاموش موڈ رکھا ہے تاکہ گٹ ہب ہینگ نہ ہو
           yes | buildozer android debug
+        continue-on-error: false
 
       - name: Upload APK
         uses: actions/upload-artifact@v4
